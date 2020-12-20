@@ -6,4 +6,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="TournamentTracker.ico" />
+  </ItemGroup>
+
 </Project>

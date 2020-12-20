@@ -50,6 +50,7 @@ namespace TrackerUI
             // 
             this.headerLabel.AutoSize = true;
             this.headerLabel.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.headerLabel.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.headerLabel.Location = new System.Drawing.Point(12, 9);
             this.headerLabel.Name = "headerLabel";
             this.headerLabel.Size = new System.Drawing.Size(197, 45);
@@ -60,6 +61,7 @@ namespace TrackerUI
             // 
             this.tournamentName.AutoSize = true;
             this.tournamentName.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tournamentName.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.tournamentName.Location = new System.Drawing.Point(198, 9);
             this.tournamentName.Name = "tournamentName";
             this.tournamentName.Size = new System.Drawing.Size(136, 45);
@@ -100,14 +102,15 @@ namespace TrackerUI
             this.matchupListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.matchupListBox.FormattingEnabled = true;
             this.matchupListBox.ItemHeight = 21;
-            this.matchupListBox.Location = new System.Drawing.Point(21, 155);
+            this.matchupListBox.Location = new System.Drawing.Point(18, 150);
             this.matchupListBox.Name = "matchupListBox";
-            this.matchupListBox.Size = new System.Drawing.Size(237, 191);
+            this.matchupListBox.Size = new System.Drawing.Size(240, 191);
             this.matchupListBox.TabIndex = 5;
             // 
             // teamOneName
             // 
             this.teamOneName.AutoSize = true;
+            this.teamOneName.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.teamOneName.Location = new System.Drawing.Point(314, 155);
             this.teamOneName.Name = "teamOneName";
             this.teamOneName.Size = new System.Drawing.Size(97, 21);
@@ -149,6 +152,7 @@ namespace TrackerUI
             // teamTwoName
             // 
             this.teamTwoName.AutoSize = true;
+            this.teamTwoName.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.teamTwoName.Location = new System.Drawing.Point(314, 287);
             this.teamTwoName.Name = "teamTwoName";
             this.teamTwoName.Size = new System.Drawing.Size(97, 21);

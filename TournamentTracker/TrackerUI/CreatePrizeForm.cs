@@ -8,16 +8,11 @@ using System.Windows.Forms;
 
 namespace TrackerUI
 {
-    public partial class CreateTournamentForm : Form
+    public partial class CreatePrizeForm : Form
     {
-        public CreateTournamentForm()
+        public CreatePrizeForm()
         {
             InitializeComponent();
-        }
-
-        private void selectTeamDropDown_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
