@@ -10,4 +10,8 @@
     <None Remove="TournamentTracker.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TrackerLibrary\TrackerLibrary.csproj" />
+  </ItemGroup>
+
 </Project>
