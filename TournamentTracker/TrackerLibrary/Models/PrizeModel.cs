@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TrackerLibrary
+namespace TrackerLibrary.Models
 {
     /// <summary>
     /// Represents a tournament prize.
@@ -33,7 +33,7 @@ namespace TrackerLibrary
         /// Represents the percentage of the prize amount.
         /// </summary>
         public double PrizePercentage { get; set; }
-
+        
         public PrizeModel()
         {
 

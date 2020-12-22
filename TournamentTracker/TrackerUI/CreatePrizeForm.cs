@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using TrackerLibrary;
+using TrackerLibrary.DataConnection;
+using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
@@ -27,10 +29,7 @@ namespace TrackerUI
                     prizePercentageValue.Text);
 
                 // Saving the prize to the databases.
-                foreach (IDataConnection db in GlobalConfig.Connections)
-                {
-                    db.CreatePrize(model);
-                }
+                GlobalConfig.Connection.CreatePrize(model);
 
                 // Wiping out previous form input values.
                 placeNameValue.Text = "";
