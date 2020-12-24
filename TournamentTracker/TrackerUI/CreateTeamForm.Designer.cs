@@ -90,6 +90,7 @@ namespace TrackerUI
             this.addMemberButton.TabIndex = 19;
             this.addMemberButton.Text = "Add Member";
             this.addMemberButton.UseVisualStyleBackColor = true;
+            this.addMemberButton.Click += new System.EventHandler(this.addMemberButton_Click);
             // 
             // selectTeamMemberDropDown
             // 
@@ -134,6 +135,7 @@ namespace TrackerUI
             this.createMemberButton.TabIndex = 21;
             this.createMemberButton.Text = "Create Member";
             this.createMemberButton.UseVisualStyleBackColor = true;
+            this.createMemberButton.Click += new System.EventHandler(this.createMemberButton_Click);
             // 
             // cellPhoneValue
             // 
@@ -235,6 +237,7 @@ namespace TrackerUI
             this.createTeamButton.TabIndex = 26;
             this.createTeamButton.Text = "Create Team";
             this.createTeamButton.UseVisualStyleBackColor = true;
+            this.createTeamButton.Click += new System.EventHandler(this.createTeamButton_Click);
             // 
             // CreateTeamForm
             // 

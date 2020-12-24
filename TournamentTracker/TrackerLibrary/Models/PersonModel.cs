@@ -9,6 +9,13 @@ namespace TrackerLibrary.Models
     /// </summary>
     public class PersonModel
     {
+        // TODO - Do I need Id?
+
+        /// <summary>
+        /// Represents an unique identifier for the person.
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// The first name of the person.
         /// </summary>
@@ -28,5 +35,18 @@ namespace TrackerLibrary.Models
         /// The primary cell phone number of the person.
         /// </summary>
         public string CellphoneNumber { get; set; }
+
+        public PersonModel()
+        {
+
+        }
+
+        public PersonModel(string firstName, string lastName, string emailAddress, string cellphoneNumber)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            EmailAddress = emailAddress;
+            CellphoneNumber = cellphoneNumber;
+        }
     }
 }

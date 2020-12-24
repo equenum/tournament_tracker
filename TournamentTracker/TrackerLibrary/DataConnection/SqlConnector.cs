@@ -10,8 +10,6 @@ namespace TrackerLibrary.DataConnection
 {
     public class SqlConnector : IDataConnection
     {
-        // TODO - Make the database CreatePrize method actually save prize information.
-
         /// <summary>
         /// Saves a new prize to the database.
         /// </summary>
@@ -32,6 +30,34 @@ namespace TrackerLibrary.DataConnection
 
                 // Inserting the values to the database.
                 connection.Execute("dbo.spPrizes_Insert", p, commandType: CommandType.StoredProcedure);
+
+                // Getting back id value from the database.
+                model.Id = p.Get<int>("@id");
+
+                return model;
+            }
+        }
+
+        /// <summary>
+        /// Saves a new person to the database.
+        /// </summary>
+        /// <param name="model">The person information.</param>
+        /// <returns>The person information, including the unique identifier.</returns>
+        public PersonModel CreatePerson(PersonModel model)
+        {
+            // Opening SQL connection.
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString("Tournaments")))
+            {
+                // Passing the values via dynamic parameters.
+                var p = new DynamicParameters();
+                p.Add("@FirstName", model.FirstName);
+                p.Add("@LastName", model.LastName);
+                p.Add("@EmailAddress", model.EmailAddress);
+                p.Add("@CellphoneNumber", model.CellphoneNumber);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                // Inserting the values to the database.
+                connection.Execute("dbo.spPeople_Insert", p, commandType: CommandType.StoredProcedure);
 
                 // Getting back id value from the database.
                 model.Id = p.Get<int>("@id");
