@@ -14,10 +14,13 @@ namespace TrackerUI
     {
         private List<PersonModel> availableTeamMembers = GlobalConfig.Connection.GetPerson_All();
         private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
+        private ITeamRequester callingForm;
 
-        public CreateTeamForm()
+        public CreateTeamForm(ITeamRequester caller)
         {
             InitializeComponent();
+
+            callingForm = caller;
 
             WireUpLists();
         }
@@ -35,12 +38,10 @@ namespace TrackerUI
         private void WireUpLists()
         {
             selectTeamMemberDropDown.DataSource = null;
-
             selectTeamMemberDropDown.DataSource = availableTeamMembers;
             selectTeamMemberDropDown.DisplayMember = "FullName";
 
             teamMembersListBox.DataSource = null;
-
             teamMembersListBox.DataSource = selectedTeamMembers;
             teamMembersListBox.DisplayMember = "FullName";
         }
@@ -73,10 +74,11 @@ namespace TrackerUI
                 {
                     TeamModel model = new TeamModel(selectedTeamMembers, teamNameValue.Text);
 
-                    model = GlobalConfig.Connection.CreateTeam(model);
+                    GlobalConfig.Connection.CreateTeam(model);
 
-                    // TODO - If we aren't closing this form after creation, reset the form
-
+                    callingForm.TeamComplete(model);
+                    
+                    this.Close();
                 }
                 else
                 {
@@ -94,7 +96,6 @@ namespace TrackerUI
         {
             bool output = true;
 
-            // Check if the field is empty.
             if (teamNameValue.Text.Length == 0)
             {
                 output = false;

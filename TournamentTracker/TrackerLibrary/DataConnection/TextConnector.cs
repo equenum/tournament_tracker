@@ -25,17 +25,19 @@ namespace TrackerLibrary.DataConnection
         private const string TeamsFile = "TeamModels.csv";
 
         /// <summary>
+        /// Represents TournamentModel output text file name including extension.
+        /// </summary>
+        private const string TournamentsFile = "TournamentModel.csv";
+
+        /// <summary>
         /// Saves a new prize to the text file.
         /// </summary>
         /// <param name="model">The prize information.</param>
         /// <returns>The prize information, including the unique identifier.</returns>
         public PrizeModel CreatePrize(PrizeModel model)
         {
-            // Read and load the text file as a List<string>.
-            // Convert the text to a List<PrizeModel>.
             List<PrizeModel> prizes = PrizesFile.FullFilePath().LoadFile().ConvertToPrizeModels();
 
-            // Finding the current highest ID.
             int currentId = 1;
 
             if (prizes.Count() > 0)
@@ -45,11 +47,8 @@ namespace TrackerLibrary.DataConnection
 
             model.Id = currentId;
 
-            // Add the new record with the new ID (current max + 1).
             prizes.Add(model);
 
-            // Convert the updated List<PrizeModel> to a List<string>.
-            // Save the List<string> to the text file.
             prizes.SaveToPrizeFile(PrizesFile);
 
             return model;
@@ -62,11 +61,8 @@ namespace TrackerLibrary.DataConnection
         /// <returns>The person information, including the unique identifier.</returns>
         public PersonModel CreatePerson(PersonModel model)
         {
-            // Read and load the text file as a List<string>.
-            // Convert the text to a List<PersonModel>.
             List<PersonModel> people = PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
 
-            // Finding the current highest ID.
             int currentId = 1;
 
             if (people.Count() > 0)
@@ -76,11 +72,8 @@ namespace TrackerLibrary.DataConnection
 
             model.Id = currentId;
 
-            // Add the new record with the new ID (current max + 1).
             people.Add(model);
 
-            // Convert the updated List<PersonModel> to a List<string>.
-            // Save the List<string> to the text file.
             people.SaveToPersonFile(PeopleFile);
 
             return model;
@@ -93,11 +86,8 @@ namespace TrackerLibrary.DataConnection
         /// <returns>The team information, including the unique identifier.</returns>
         public TeamModel CreateTeam(TeamModel model)
         {
-            // Read and load the text file as a List<string>.
-            // Convert the text to a List<PersonModel>.
             List<TeamModel> teams = TeamsFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
 
-            // Finding the current highest ID.
             int currentId = 1;
 
             if (teams.Count() > 0)
@@ -107,14 +97,33 @@ namespace TrackerLibrary.DataConnection
 
             model.Id = currentId;
 
-            // Add the new record with the new ID (current max + 1).
             teams.Add(model);
 
-            // Convert the updated List<TeamModel> to a List<string>.
-            // Save the List<string> to the text file.
             teams.SaveToTeamFile(TeamsFile);
 
             return model;
+        }
+
+        // TODO - write a full xml comment later. This method saves a lot of things. 
+        public void CreateTournament(TournamentModel model)
+        {
+            List<TournamentModel> tournaments = TournamentsFile
+                .FullFilePath()
+                .LoadFile()
+                .ConvertToTournamentModels(TeamsFile, PeopleFile, PrizesFile);
+
+            int currentId = 1;
+
+            if (tournaments.Count() > 0)
+            {
+                currentId = tournaments.OrderByDescending(x => x.Id).First().Id + 1;
+            }
+
+            model.Id = currentId;
+
+            tournaments.Add(model);
+
+            tournaments.SaveToTournamentsFile(TournamentsFile);
         }
 
         /// <summary>
@@ -123,9 +132,12 @@ namespace TrackerLibrary.DataConnection
         /// <returns>A list of people information.</returns>
         public List<PersonModel> GetPerson_All()
         {
-            List<PersonModel> people = PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
+            return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
+        }
 
-            return people;
+        public List<TeamModel> GetTeam_All()
+        {
+            return TeamsFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
         }
     }
 }

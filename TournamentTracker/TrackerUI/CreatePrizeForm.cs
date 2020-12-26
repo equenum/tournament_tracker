@@ -13,9 +13,13 @@ namespace TrackerUI
 {
     public partial class CreatePrizeForm : Form
     {
-        public CreatePrizeForm()
+        private IPrizeRequester callingForm;
+
+        public CreatePrizeForm(IPrizeRequester caller)
         {
             InitializeComponent();
+
+            callingForm = caller;
         }
 
         private void createPrizeButton_Click(object sender, EventArgs e)
@@ -28,14 +32,18 @@ namespace TrackerUI
                     prizeAmountValue.Text, 
                     prizePercentageValue.Text);
 
-                // Saving the prize to the databases.
                 GlobalConfig.Connection.CreatePrize(model);
 
-                // Wiping out previous form input values.
-                placeNameValue.Text = "";
-                placeNumberValue.Text = "";
-                prizeAmountValue.Text = "0";
-                prizePercentageValue.Text = "0";
+                callingForm.PrizeComplete(model);
+
+                this.Close();
+
+                // Wiping out previous form input values in order to return 
+                // the form fields to its original state.
+                //placeNameValue.Text = "";
+                //placeNumberValue.Text = "";
+                //prizeAmountValue.Text = "0";
+                //prizePercentageValue.Text = "0";
             }
             else
             {
@@ -47,7 +55,6 @@ namespace TrackerUI
         {
             bool output = true;
 
-            // Place number textbox input validation.
             bool placeNumberIsValidNumber = int.TryParse(placeNumberValue.Text, out int placeNumber);
 
             if (placeNumberIsValidNumber == false)
@@ -60,13 +67,11 @@ namespace TrackerUI
                 output = false;
             }
 
-            // Place name textbox input validation.
             if (placeNameValue.Text.Length == 0)
             {
                 output = false;
             }
 
-            // Prize amount and Prize percentage textbox input validation.
             bool prizeAmountIsValid = decimal.TryParse(prizeAmountValue.Text, out decimal prizeAmount);
             bool prizePercentageIsValid = double.TryParse(prizePercentageValue.Text, out double prizePercentage);
 
@@ -80,7 +85,6 @@ namespace TrackerUI
                 output = false;
             }
 
-            // Prize percentage range validation.
             if (prizePercentage > 100 || prizePercentage < 0)
             {
                 output = false;

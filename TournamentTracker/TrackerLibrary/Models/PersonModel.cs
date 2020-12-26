@@ -9,8 +9,6 @@ namespace TrackerLibrary.Models
     /// </summary>
     public class PersonModel
     {
-        // TODO - Do I need Id?
-
         /// <summary>
         /// Represents an unique identifier for the person.
         /// </summary>
