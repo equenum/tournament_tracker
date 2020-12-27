@@ -122,16 +122,16 @@ namespace TrackerUI
         {
             if (ValidateTournamentName() && ValidateTournamentFee())
             {
-                TournamentModel t = new TournamentModel();
+                TournamentModel tm = new TournamentModel();
 
-                t.TournamentName = tournamentNameValue.Text;
-                t.EntryFee = decimal.Parse(entryFeeValue.Text);
-                t.Prizes = seletedPrizes;
-                t.EnteredTeams = selectedTeams;
+                tm.TournamentName = tournamentNameValue.Text;
+                tm.EntryFee = decimal.Parse(entryFeeValue.Text);
+                tm.Prizes = seletedPrizes;
+                tm.EnteredTeams = selectedTeams;
 
-                // Wire up matchups
+                TournamentLogic.CreateRounds(tm);
 
-                GlobalConfig.Connection.CreateTournament(t);
+                GlobalConfig.Connection.CreateTournament(tm);
             }
         }
 
