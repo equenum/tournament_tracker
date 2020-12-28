@@ -153,5 +153,15 @@ namespace TrackerLibrary.DataConnection
         {
             return TeamsFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
         }
+
+        public List<TournamentModel> GetTournament_All()
+        {
+            List<TournamentModel> tournaments = TournamentsFile
+                .FullFilePath()
+                .LoadFile()
+                .ConvertToTournamentModels(TeamsFile, PeopleFile, PrizesFile);
+
+            return tournaments;
+        }
     }
 }
