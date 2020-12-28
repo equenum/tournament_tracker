@@ -9,6 +9,8 @@ namespace TrackerLibrary.DataConnection
 {
     public class TextConnector : IDataConnection
     {
+        // TODO - Probably delete this parameters later during refactoring.
+
         /// <summary>
         /// Represents PrizeModel output text file name including extension.
         /// </summary>
@@ -28,6 +30,16 @@ namespace TrackerLibrary.DataConnection
         /// Represents TournamentModel output text file name including extension.
         /// </summary>
         private const string TournamentsFile = "TournamentModel.csv";
+
+        /// <summary>
+        /// Represents Matchup output text file name including extension.
+        /// </summary>
+        private const string MatchupFile = "MatchupModel.csv";
+
+        /// <summary>
+        /// Represents MatchupEntry output text file name including extension.
+        /// </summary>
+        private const string MatchupEntryFile = "MatchupEntryModel.csv";
 
         /// <summary>
         /// Saves a new prize to the text file.
@@ -120,6 +132,8 @@ namespace TrackerLibrary.DataConnection
             }
 
             model.Id = currentId;
+
+            model.SaveRoundsToFile(MatchupFile, MatchupEntryFile);
 
             tournaments.Add(model);
 

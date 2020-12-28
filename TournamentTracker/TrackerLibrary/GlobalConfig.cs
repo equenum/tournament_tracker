@@ -12,6 +12,37 @@ namespace TrackerLibrary
     public static class GlobalConfig
     {
         /// <summary>
+        /// Represents PrizeModel output text file name including extension.
+        /// </summary>
+        public const string PrizesFile = "PrizeModels.csv";
+
+        /// <summary>
+        /// Represents PrizeModel output text file name including extension.
+        /// </summary>
+        public const string PeopleFile = "PersonModels.csv";
+
+        /// <summary>
+        /// Represents TeameModel output text file name including extension.
+        /// </summary>
+        public const string TeamsFile = "TeamModels.csv";
+
+        /// <summary>
+        /// Represents TournamentModel output text file name including extension.
+        /// </summary>
+        public const string TournamentsFile = "TournamentModel.csv";
+
+        /// <summary>
+        /// Represents Matchup output text file name including extension.
+        /// </summary>
+        public const string MatchupFile = "MatchupModel.csv";
+
+        /// <summary>
+        /// Represents MatchupEntry output text file name including extension.
+        /// </summary>
+        public const string MatchupEntryFile = "MatchupEntryModel.csv";
+
+
+        /// <summary>
         /// Represents selected database connection type.
         /// </summary>
         public static IDataConnection Connection { get; private set; }
