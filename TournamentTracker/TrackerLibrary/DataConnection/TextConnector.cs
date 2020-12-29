@@ -163,5 +163,10 @@ namespace TrackerLibrary.DataConnection
 
             return tournaments;
         }
+
+        public void UpdateMatchup(MatchupModel model)
+        {
+            model.UpdateMatchupToFile();
+        }
     }
 }
