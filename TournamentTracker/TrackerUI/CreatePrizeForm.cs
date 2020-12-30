@@ -15,6 +15,9 @@ namespace TrackerUI
     {
         private IPrizeRequester callingForm;
 
+        /// <summary>
+        /// Initializes CreatePrizeForm.
+        /// </summary>
         public CreatePrizeForm(IPrizeRequester caller)
         {
             InitializeComponent();
@@ -37,13 +40,6 @@ namespace TrackerUI
                 callingForm.PrizeComplete(model);
 
                 this.Close();
-
-                // Wiping out previous form input values in order to return 
-                // the form fields to its original state.
-                //placeNameValue.Text = "";
-                //placeNumberValue.Text = "";
-                //prizeAmountValue.Text = "0";
-                //prizePercentageValue.Text = "0";
             }
             else
             {

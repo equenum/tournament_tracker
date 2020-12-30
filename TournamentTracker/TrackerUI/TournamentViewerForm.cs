@@ -29,7 +29,6 @@ namespace TrackerUI
             LoadFormData();
 
             LoadRounds();
-
         }
 
         private void LoadFormData()
@@ -44,7 +43,6 @@ namespace TrackerUI
             matchupListBox.DataSource = selectedMatchups;
             matchupListBox.DisplayMember = "DisplayName";
         }
-
 
         private void LoadRounds()
         {
@@ -63,79 +61,31 @@ namespace TrackerUI
             }
 
             LoadMatchups(1);
-
-
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TournamentViewerForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void roundDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadMatchups((int)roundDropDown.SelectedItem);
-
         }
 
         private void LoadMatchups(int round)
         {
-            //int round = (int)roundDropDown.SelectedItem;
-
             foreach (List<MatchupModel> matchups in tournament.Rounds)
             {
                 if (matchups.First().MatchupRound == round)
                 {
-                    //selectedMatchups.Clear();
-
                     foreach (MatchupModel m in matchups)
                     {
-                        if (m.Winner == null || !unplayedOnlyCheckbox.Checked)
+                        if (m.Winner == null)
                         {
                             selectedMatchups.Add(m);
-
                         }
-                        //selectedMatchups.Add(m);
                     }
-
-
                 }
             }
 
-            LoadMatchup(); // delete if not works
-
-            /*
-            if (selectedMatchups.Count > 0)
-            {
-                LoadMatchup(); // delete if not works
-            }
-            */
-
-            //DisplayMatchupInfo();
+            LoadMatchup();
         }
-
-        /*
-        private void DisplayMatchupInfo()
-        {
-            bool isVisible = selectedMatchups.Count > 0;
-
-            teamOneName.Visible = isVisible;
-            teamOneScoreLabel.Visible = isVisible;
-            teamOneScoreValue.Visible = isVisible;
-
-            teamTwoName.Visible = isVisible;
-            teamTwoScoreLabel.Visible = isVisible;
-            teamTwoScoreValue.Visible = isVisible;
-
-            versusLabel.Visible = isVisible;
-            scoreButton.Visible = isVisible;
-
-        }*/
 
         private void LoadMatchup()
         {
@@ -157,9 +107,6 @@ namespace TrackerUI
                     {
                         teamOneName.Text = "Not Yet Set";
                         teamOneScoreValue.Text = "";
-
-                        //teamTwoName.Text = "<bye>";
-                        //teamTwoScoreValue.Text = "0";
                     }
                 }
 
@@ -181,18 +128,9 @@ namespace TrackerUI
 
         private void matchupListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             LoadMatchup();
-
         }
-
-        private void unplayedOnlyCheckbox_CheckedChanged(object sender, EventArgs e)
-        {/*
-            LoadMatchups((int)roundDropDown.SelectedItem);
-            LoadMatchup(); // ?
-            */
-        }
-
+        
         private void scoreButton_Click(object sender, EventArgs e)
         { 
             MatchupModel m = (MatchupModel)matchupListBox.SelectedItem;
@@ -238,43 +176,7 @@ namespace TrackerUI
                 }
             }
 
-            if (teamOneScore > teamTwoScore)
-            {
-                // Team one wins
-                m.Winner = m.Entries[0].TeamCompeting;
-            }
-            else if (teamTwoScore > teamOneScore)
-            {
-                m.Winner = m.Entries[1].TeamCompeting;
-            }
-            else
-            {
-                MessageBox.Show("I do not handle tie games.");
-            }
-            
-            foreach (List<MatchupModel> round in tournament.Rounds)
-            {
-                foreach (MatchupModel rm in round)
-                {
-                    foreach (MatchupEntryModel me in rm.Entries)
-                    {
-                        if (me.ParentMatchup != null)
-                        {
-                            if (me.ParentMatchup.Id == m.Id)
-                            {
-                                me.TeamCompeting = m.Winner;
-                                GlobalConfig.Connection.UpdateMatchup(rm);
-                            }
-                        }
-                    }
-                }
-            }
-            
-            //LoadMatchups((int)roundDropDown.SelectedItem);
-
-            GlobalConfig.Connection.UpdateMatchup(m);
-            
+            TournamentLogic.UpdateTournamentResults(tournament);
         }
     }
 }
-

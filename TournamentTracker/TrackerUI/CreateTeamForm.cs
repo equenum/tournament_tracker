@@ -16,6 +16,9 @@ namespace TrackerUI
         private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
         private ITeamRequester callingForm;
 
+        /// <summary>
+        /// Initializes CreateTeamForm.
+        /// </summary>
         public CreateTeamForm(ITeamRequester caller)
         {
             InitializeComponent();
@@ -23,16 +26,6 @@ namespace TrackerUI
             callingForm = caller;
 
             WireUpLists();
-        }
-
-        // This method is used just for testing purposes. 
-        private void CreateSampleData()
-        {
-            availableTeamMembers.Add(new PersonModel("Mike", "Rose", "TestEmail", "TestCellPhone"));
-            availableTeamMembers.Add(new PersonModel("Helen", "Storm", "TestEmail", "TestCellPhone"));
-
-            selectedTeamMembers.Add(new PersonModel("Regina", "Mayers", "TestEmail", "TestCellPhone"));
-            selectedTeamMembers.Add(new PersonModel("Oliver", "Cage", "TestEmail", "TestCellPhone"));
         }
 
         private void WireUpLists()
@@ -45,26 +38,6 @@ namespace TrackerUI
             teamMembersListBox.DataSource = selectedTeamMembers;
             teamMembersListBox.DisplayMember = "FullName";
         }
-
-        private void CreateTeamForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void headerLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tournamentNameValue_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        /*
-            Create Team Section
-            Contains all methods for creating a team. 
-        */
 
         private void createTeamButton_Click(object sender, EventArgs e)
         {
@@ -104,11 +77,6 @@ namespace TrackerUI
             return output;
         }
 
-        /*
-            Add New Member Section
-            Contains all methods for Adding New Member. 
-        */
-
         private void createMemberButton_Click(object sender, EventArgs e)
         {
             if (ValidateAddNewMemberForm())
@@ -120,15 +88,11 @@ namespace TrackerUI
                     cellPhoneValue.Text
                     );
 
-                // Saving the prize to the databases.
-                model = GlobalConfig.Connection.CreatePerson(model);
+                GlobalConfig.Connection.CreatePerson(model);
 
-                // Putting the updated person (with id assigned during CreatePerson completion) 
-                // to teamMember ListBox.
                 selectedTeamMembers.Add(model);
                 WireUpLists();
 
-                // Wiping out previous form input values.
                 firstNameValue.Text = ""; 
                 lastNameValue.Text = "";
                 emailValue.Text = "";
@@ -142,11 +106,10 @@ namespace TrackerUI
 
         }
 
-        private bool ValidateAddNewMemberForm() // TODO - Make a proper validation.
+        private bool ValidateAddNewMemberForm()
         {
             bool output = true;
 
-            // Check if the form fields are ampty.
             if (firstNameValue.Text.Length == 0)
             {
                 output = false;
@@ -169,11 +132,6 @@ namespace TrackerUI
 
             return output;
         }
-
-        /*
-            Select and Remove Member Section
-            Contains all methods for selecting existing members to teamMembersListBox and removing them from there. 
-        */
 
         private void addMemberButton_Click(object sender, EventArgs e)
         {

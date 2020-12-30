@@ -100,7 +100,7 @@ namespace TrackerUI
             this.selectTeamDropDown.Name = "selectTeamDropDown";
             this.selectTeamDropDown.Size = new System.Drawing.Size(210, 29);
             this.selectTeamDropDown.TabIndex = 14;
-            this.selectTeamDropDown.SelectedIndexChanged += new System.EventHandler(this.selectTeamDropDown_SelectedIndexChanged);
+            //this.selectTeamDropDown.SelectedIndexChanged += new System.EventHandler(this.selectTeamDropDown_SelectedIndexChanged);
             // 
             // selectTeamLabel
             // 

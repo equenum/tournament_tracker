@@ -34,7 +34,6 @@ namespace TrackerUI
             this.tournamentName = new System.Windows.Forms.Label();
             this.roundLabel = new System.Windows.Forms.Label();
             this.roundDropDown = new System.Windows.Forms.ComboBox();
-            this.unplayedOnlyCheckbox = new System.Windows.Forms.CheckBox();
             this.matchupListBox = new System.Windows.Forms.ListBox();
             this.teamOneName = new System.Windows.Forms.Label();
             this.teamOneScoreLabel = new System.Windows.Forms.Label();
@@ -76,7 +75,7 @@ namespace TrackerUI
             this.roundLabel.Size = new System.Drawing.Size(56, 21);
             this.roundLabel.TabIndex = 2;
             this.roundLabel.Text = "Round";
-            this.roundLabel.Click += new System.EventHandler(this.label1_Click);
+            //this.roundLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // roundDropDown
             // 
@@ -86,17 +85,6 @@ namespace TrackerUI
             this.roundDropDown.Size = new System.Drawing.Size(170, 29);
             this.roundDropDown.TabIndex = 3;
             this.roundDropDown.SelectedIndexChanged += new System.EventHandler(this.roundDropDown_SelectedIndexChanged);
-            // 
-            // unplayedOnlyCheckbox
-            // 
-            this.unplayedOnlyCheckbox.AutoSize = true;
-            this.unplayedOnlyCheckbox.ForeColor = System.Drawing.Color.Red;
-            this.unplayedOnlyCheckbox.Location = new System.Drawing.Point(88, 108);
-            this.unplayedOnlyCheckbox.Name = "unplayedOnlyCheckbox";
-            this.unplayedOnlyCheckbox.Size = new System.Drawing.Size(129, 25);
-            this.unplayedOnlyCheckbox.TabIndex = 4;
-            this.unplayedOnlyCheckbox.Text = "Unplayed only";
-            this.unplayedOnlyCheckbox.UseVisualStyleBackColor = true;
             // 
             // matchupListBox
             // 
@@ -195,7 +183,6 @@ namespace TrackerUI
             this.Controls.Add(this.teamOneScoreLabel);
             this.Controls.Add(this.teamOneName);
             this.Controls.Add(this.matchupListBox);
-            this.Controls.Add(this.unplayedOnlyCheckbox);
             this.Controls.Add(this.roundDropDown);
             this.Controls.Add(this.roundLabel);
             this.Controls.Add(this.tournamentName);
@@ -204,7 +191,7 @@ namespace TrackerUI
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TournamentViewerForm";
             this.Text = "Tournament Viewer";
-            this.Load += new System.EventHandler(this.TournamentViewerForm_Load);
+            //this.Load += new System.EventHandler(this.TournamentViewerForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,7 +203,6 @@ namespace TrackerUI
         private System.Windows.Forms.Label tournamentName;
         private System.Windows.Forms.Label roundLabel;
         private System.Windows.Forms.ComboBox roundDropDown;
-        private System.Windows.Forms.CheckBox unplayedOnlyCheckbox;
         private System.Windows.Forms.ListBox matchupListBox;
         private System.Windows.Forms.Label teamOneName;
         private System.Windows.Forms.Label teamOneScoreLabel;

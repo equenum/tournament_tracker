@@ -17,8 +17,7 @@ namespace TrackerLibrary.DataConnection
         /// Saves a new prize to the database.
         /// </summary>
         /// <param name="model">The prize information.</param>
-        /// <returns>The prize information, including the unique identifier.</returns>
-        public PrizeModel CreatePrize(PrizeModel model)
+        public void CreatePrize(PrizeModel model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
@@ -32,8 +31,6 @@ namespace TrackerLibrary.DataConnection
                 connection.Execute("dbo.spPrizes_Insert", p, commandType: CommandType.StoredProcedure);
 
                 model.Id = p.Get<int>("@id");
-
-                return model;
             }
         }
 
@@ -41,8 +38,7 @@ namespace TrackerLibrary.DataConnection
         /// Saves a new person to the database.
         /// </summary>
         /// <param name="model">The person information.</param>
-        /// <returns>The person information, including the unique identifier.</returns>
-        public PersonModel CreatePerson(PersonModel model)
+        public void CreatePerson(PersonModel model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
             {
@@ -56,8 +52,33 @@ namespace TrackerLibrary.DataConnection
                 connection.Execute("dbo.spPeople_Insert", p, commandType: CommandType.StoredProcedure);
 
                 model.Id = p.Get<int>("@id");
+            }
+        }
 
-                return model;
+        /// <summary>
+        /// Saves a new team and team members to the database.
+        /// </summary>
+        /// <param name="model">The team information.</param>
+        public void CreateTeam(TeamModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TeamName", model.TeamName);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                connection.Execute("dbo.spTeams_Insert", p, commandType: CommandType.StoredProcedure);
+
+                model.Id = p.Get<int>("@id");
+
+                foreach (PersonModel tm in model.TeamMembers)
+                {
+                    p = new DynamicParameters();
+                    p.Add("@TeamId", model.Id);
+                    p.Add("@PersonId", tm.Id);
+
+                    connection.Execute("dbo.spTeamMembers_Insert", p, commandType: CommandType.StoredProcedure);
+                }
             }
         }
 
@@ -72,6 +93,8 @@ namespace TrackerLibrary.DataConnection
                 SaveTournamentEntries(connection, model);
 
                 SaveTournamentRounds(connection, model);
+
+                TournamentLogic.UpdateTournamentResults(model);
             }
         }
 
@@ -160,36 +183,6 @@ namespace TrackerLibrary.DataConnection
         }
 
         /// <summary>
-        /// Saves a new team and team members to the database.
-        /// </summary>
-        /// <param name="model">The team information.</param>
-        /// <returns>The team information, including the unique identifier.</returns>
-        public TeamModel CreateTeam(TeamModel model)
-        {
-            using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))
-            {
-                var p = new DynamicParameters();
-                p.Add("@TeamName", model.TeamName);
-                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-                connection.Execute("dbo.spTeams_Insert", p, commandType: CommandType.StoredProcedure);
-
-                model.Id = p.Get<int>("@id");
-
-                foreach (PersonModel tm in model.TeamMembers)
-                {
-                    p = new DynamicParameters();
-                    p.Add("@TeamId", model.Id);
-                    p.Add("@PersonId", tm.Id);
-
-                    connection.Execute("dbo.spTeamMembers_Insert", p, commandType: CommandType.StoredProcedure);
-                }
-
-                return model;
-            }
-        }
-
-        /// <summary>
         /// Gets all people information from the database.
         /// </summary>
         /// <returns>A list of people information.</returns>
@@ -229,6 +222,10 @@ namespace TrackerLibrary.DataConnection
             return output;
         }
 
+        /// <summary>
+        /// Gets all tournament information from the database.
+        /// </summary>
+        /// <returns>A list of tournament information.</returns>
         public List<TournamentModel> GetTournament_All()
         {
             List<TournamentModel> output;
@@ -314,6 +311,10 @@ namespace TrackerLibrary.DataConnection
             return output;
         }
 
+        /// <summary>
+        /// Saves the updated MatchupModel to the database.
+        /// </summary>
+        /// <param name="model">The matchup information.</param>
         public void UpdateMatchup(MatchupModel model)
         {
             using (IDbConnection connection = new SqlConnection(GlobalConfig.CnnString(db)))

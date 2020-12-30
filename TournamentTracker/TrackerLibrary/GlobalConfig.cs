@@ -41,28 +41,34 @@ namespace TrackerLibrary
         /// </summary>
         public const string MatchupEntryFile = "MatchupEntryModel.csv";
 
-
         /// <summary>
         /// Represents selected database connection type.
         /// </summary>
         public static IDataConnection Connection { get; private set; }
 
+        /// <summary>
+        /// Initializes database system connection.
+        /// </summary>
+        /// <param name="db">Database</param>
         public static void InitializeConnections(DatabaseType db)
         {
             if (db == DatabaseType.Sql)
             {
-                // TODO - Set up the SQL connector properly.
                 SqlConnector sql = new SqlConnector();
                 Connection = sql;
             }
             else if (db == DatabaseType.TextFile)
             {
-                // TODO - Set up the text connector properly.
                 TextConnector text = new TextConnector();
                 Connection = text;
             }
         }
 
+        /// <summary>
+        /// Gets database system connection string.
+        /// </summary>
+        /// <param name="name">Database name.</param>
+        /// <returns>Database connection string.</returns>
         public static string CnnString(string name)
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;

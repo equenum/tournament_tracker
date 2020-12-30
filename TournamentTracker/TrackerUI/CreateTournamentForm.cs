@@ -16,6 +16,9 @@ namespace TrackerUI
         private List<TeamModel> selectedTeams = new List<TeamModel>();
         private List<PrizeModel> seletedPrizes = new List<PrizeModel>();
 
+        /// <summary>
+        /// Initializes CreateTournamentForm.
+        /// </summary>
         public CreateTournamentForm()
         {
             InitializeComponent();
@@ -36,11 +39,6 @@ namespace TrackerUI
             prizesListBox.DataSource = null;
             prizesListBox.DataSource = seletedPrizes;
             prizesListBox.DisplayMember = "PlaceName";
-        }
-        
-        private void selectTeamDropDown_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void addTeamButton_Click(object sender, EventArgs e)
@@ -66,7 +64,11 @@ namespace TrackerUI
             CreatePrizeForm form = new CreatePrizeForm(this);
             form.Show();
         }
-
+        
+        /// <summary>
+        /// Sends a complete prize to a requester.
+        /// </summary>
+        /// <param name="model">The complete prize information.</param>
         public void PrizeComplete(PrizeModel model)
         {
             seletedPrizes.Add(model);
@@ -79,6 +81,10 @@ namespace TrackerUI
             form.Show();
         }
 
+        /// <summary>
+        /// Sends a complete team to a requester.
+        /// </summary>
+        /// <param name="model">The complete team information.</param>
         public void TeamComplete(TeamModel model)
         {
             selectedTeams.Add(model);
@@ -132,6 +138,10 @@ namespace TrackerUI
                 TournamentLogic.CreateRounds(tm);
 
                 GlobalConfig.Connection.CreateTournament(tm);
+
+                TournamentViewerForm form = new TournamentViewerForm(tm);
+                form.Show();
+                this.Close();
             }
         }
 

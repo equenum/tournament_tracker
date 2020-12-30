@@ -59,7 +59,7 @@ namespace TrackerUI
             this.teamNameValue.Name = "teamNameValue";
             this.teamNameValue.Size = new System.Drawing.Size(300, 29);
             this.teamNameValue.TabIndex = 13;
-            this.teamNameValue.TextChanged += new System.EventHandler(this.tournamentNameValue_TextChanged);
+            //this.teamNameValue.TextChanged += new System.EventHandler(this.tournamentNameValue_TextChanged);
             // 
             // teamNameLabel
             // 
@@ -80,7 +80,7 @@ namespace TrackerUI
             this.headerLabel.Size = new System.Drawing.Size(196, 45);
             this.headerLabel.TabIndex = 11;
             this.headerLabel.Text = "Create Team";
-            this.headerLabel.Click += new System.EventHandler(this.headerLabel_Click);
+            //this.headerLabel.Click += new System.EventHandler(this.headerLabel_Click);
             // 
             // addMemberButton
             // 
@@ -261,7 +261,7 @@ namespace TrackerUI
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CreateTeamForm";
             this.Text = "Create Team";
-            this.Load += new System.EventHandler(this.CreateTeamForm_Load);
+            //this.Load += new System.EventHandler(this.CreateTeamForm_Load);
             this.addNewMemberGroupBox.ResumeLayout(false);
             this.addNewMemberGroupBox.PerformLayout();
             this.ResumeLayout(false);
