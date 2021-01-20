@@ -17,7 +17,7 @@ At the same time, I wrote this application from A to Z with my own hands, includ
 
 There are some item I've learn along the way:
 
-- WinForms UI (.NET Framework);
+- WinForms UI (.NET Core);
 - SQL database (full development process from start to finish, stored procedures);
 - Dapper M-ORM (object-relational mapping);
 - CSV file database;
