@@ -5,7 +5,7 @@ A simple application that can be used to track progress in any given single-elim
 
 This application has a Three-tier architecture:
 
-- Presentation layer: WPF (C#, .NET Core);
+- Presentation layer: WinForms (C#, .NET Core);
 - Business layer: Class Library (C#, .NET Core);
 - Data layer (option 1): Local MS Server database;
 - Data layer (option 2): Local CSV file-based database.
@@ -17,7 +17,7 @@ At the same time, I wrote this application from A to Z with my own hands, includ
 
 There are some item I've learn along the way:
 
-- WPF UI (.NET Framework);
+- WinForms UI (.NET Framework);
 - SQL database (full development process from start to finish, stored procedures);
 - Dapper M-ORM (object-relational mapping);
 - CSV file database;
