@@ -3,7 +3,7 @@ A simple application that can be used to track progress in any given single-elim
 
 # Description:
 
-This application has a Three-tier architecture:
+This application has the following architecture:
 
 - Presentation layer: WinForms (C#, .NET Core);
 - Business layer: Class Library (C#, .NET Core);
