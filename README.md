@@ -7,7 +7,7 @@ This application has the following architecture:
 
 - Presentation layer: WinForms (C#, .NET Core);
 - Business layer: Class Library (C#, .NET Core);
-- Data layer (option 1): Local MS Server database;
+- Data layer (option 1): Local MSServer database;
 - Data layer (option 2): Local CSV file-based database.
 
 # Note: 
